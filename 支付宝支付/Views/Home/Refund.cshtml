@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "申请退款";
+}
+<div style="margin-left:2%;color:#f00">支付宝订单号和商户订单号选少填一个，支付宝订单号优先：</div><br />
+<div style="margin-left:2%;">支付宝订单号：</div><br />
+<input type="text" id="trade_no" style="width:96%;height:35px;margin-left:2%">
+<br /><br />
+<div style="margin-left:2%;">商户订单号：</div><br />
+<input type="text" id="out_trade_no" style="width:96%;height:35px;margin-left:2%;"><br /><br />
+<div style="margin-left:2%;">金额（单位为元，支持两位小数）：</div><br />
+<input type="text" id="refund_amount" style="width:96%;height:35px;margin-left:2%;"><br /><br />
+<div style="margin-left:2%;">退款原因（可选）：</div><br />
+<input type="text" id="refund_reason" style="width:96%;height:35px;margin-left:2%;"><br /><br />
+<div style="margin-left:2%;">标识一次退款请求，同一笔交易多次退款需要保证唯一，如需部分退款，则此参数必传：</div><br />
+<input type="text" id="out_request_no" style="width:96%;height:35px;margin-left:2%;"><br /><br />
+<div style="margin-left:2%;">退款操作员编号：</div><br />
+<input type="text" id="operator_id" style="width:96%;height:35px;margin-left:2%;"><br /><br />
+<div align="center">
+    <input type="button" value="申请退款" style="width:210px; height:50px; border-radius: 15px;background-color:#00CD00; border:0px #FE6714 solid; cursor: pointer;  color:white;  font-size:16px;" onclick="submit_Click()" />
+</div>
+<script type="text/javascript">
+    function submit_Click() {
+        $.ajax({
+            url: '/Home/AlipayTradeRefund',
+            type: 'post',
+            dataType: 'json',
+            data: { 'trade_no': $("#trade_no").val(), 'out_trade_no': $("#out_trade_no").val(), 'refund_amount': $("#refund_amount").val(), 'refund_reason': $("#refund_reason").val(), 'out_request_no': $("#out_request_no").val(), 'operator_id': $("#operator_id").val() },
+            success: function (data) {
+                var result = JSON.parse(data);
+                console.log(result)
+            }
+        })
+    }
+</script>
