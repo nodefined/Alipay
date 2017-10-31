@@ -1,0 +1,4 @@
+# Alipay
+支付宝支付demo
+修改Help文件夹下的AlipayConfig文件
+修改App_Data里的 rsa_Alipay_public_key，rsa_private_key，rsa_public_key 
